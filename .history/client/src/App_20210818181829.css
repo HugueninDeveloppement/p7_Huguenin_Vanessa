@@ -1,0 +1,30 @@
+.App {
+  text-align: center;
+}
+
+.logo-header {
+  height: 100px;
+  width: 100%;
+}
+
+.nav-log{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-bottom: 1em;
+}
+
+.form-login{
+}
+
+.group-form-login{
+  display: flex;
+}
+
+
+
+
+
+
+

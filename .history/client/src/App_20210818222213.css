@@ -1,0 +1,163 @@
+.App {
+  text-align: center;
+}
+
+.logo-header {
+  height: 100px;
+  width: 100%;
+}
+
+.nav-log,.nav-home,.nav-rigth{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: 1em;
+}
+
+.nav-name{
+  display: flex;
+  flex-direction: row;  
+  justify-content: space-around;
+  align-items: center;
+}
+
+.nav-rigth button{
+  text-align: center;
+  height: 25px;
+  border: 1px rgb(106, 131, 138) solid;
+  border-radius: 15px;
+  background-color:rgb(45, 194, 231);
+}
+
+.form-login{
+  padding: 1em;
+  border: 2px solid rgb(106, 131, 138);
+  border-radius: 15px;
+}
+
+.group-form-login{
+  display: flex;
+  padding: 0.5em;
+}
+
+.group-form-login label{
+  width: 40%;
+  text-align: start;
+}
+
+.group-form-login input textarea {
+  background-color:rgb(45, 194, 231);
+  color:rgb(106, 131, 138)
+}
+
+.form-login button,.form-register button,.formPostContainer button{
+  border: 1px rgb(106, 131, 138) solid;
+  border-radius: 15px;
+  background-color:rgb(45, 194, 231);
+  margin-top: 1em;
+}
+
+.group-form-register,.formPostContainer{
+  display: flex;
+  flex-direction: column;
+  padding: 0.5em;
+}
+
+.form-register,.createPost-contain{
+  padding: 1em;
+  border: 2px solid rgb(106, 131, 138);
+  border-radius: 15px;
+}
+
+.group-form-register label{
+  width: 40%;
+  text-align: start;
+}
+
+.form-register-alert{
+  width: 100%;
+}
+
+.formPostContainer div{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+}
+
+.formPostContainer label{
+  width: 10%;
+}
+
+.formPostContainer input{
+  width: 75%;
+}
+
+.formPostContainer textarea{
+  height: 160px;
+  width: 75%;
+}
+
+.admin-home{
+  display: flex;
+  justify-content: space-around;
+}
+
+.PermIdentityTwoToneIcon,.SupervisorAccountIcon,.DashboardIcon{
+  color: rgb(45, 194, 231);
+}
+
+.post-contain{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.post-card{
+  width: 90%;
+  border: 2px solid rgb(45, 194, 231);
+  border-radius: 15px;
+  margin-bottom: 0.5em;
+}
+
+.header-post-card{
+  border-bottom:2px solid rgb(45, 194, 231) ;
+}
+
+.title-post-card{
+  padding: 0.3em;
+  border-bottom:2px solid rgb(45, 194, 231); 
+  font-weight: 600;
+  font-size: 1.2em;
+}
+
+.textContent-post-card{
+  padding: 0.3em;
+  font-size: 1.1em;
+  word-wrap:inherit ;
+  overflow: clip;
+  text-overflow: ellipsis;
+  height: 180px;
+}
+
+.footer-post-card{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.3em;
+}
+
+.footer-post-card div{
+  padding-left: 0.3em;
+
+}
+
+
+
+
+
+
+

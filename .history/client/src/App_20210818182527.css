@@ -1,0 +1,43 @@
+.App {
+  text-align: center;
+}
+
+.logo-header {
+  height: 100px;
+  width: 100%;
+}
+
+.nav-log{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  padding-bottom: 1em;
+}
+
+.form-login{
+  padding: 1em;
+  border: 2px solid gray;
+  border-radius: 10%;
+}
+
+.group-form-login{
+  display: flex;
+  padding: 0.5em;
+}
+
+.group-form-login label{
+  width: 40%;
+  text-align: start;
+}
+
+.form-login button{
+  border: 1px blueviolet solid;
+}
+
+
+
+
+
+
+

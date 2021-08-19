@@ -1,0 +1,14 @@
+.App {
+  text-align: center;
+}
+
+.logo-header {
+  height: 100px;
+  width: 100%;
+}
+
+.nav-bar {
+  display: flex;
+  flex-direction: row;
+}
+

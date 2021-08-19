@@ -1,0 +1,173 @@
+import React ,{useContext} from 'react';
+import Axios from "axios";
+import { useEffect, useState} from "react";
+import {useHistory, Link} from 'react-router-dom';
+import {AuthContext} from '../utils/helpers/AuthContext';
+import ThumbUpAltIcon from '@material-ui/icons/ThumbUpAlt';
+import ThumbUpAltOutlinedIcon from '@material-ui/icons/ThumbUpAltOutlined';
+import DashboardSharpIcon from '@material-ui/icons/DashboardSharp';
+import ReportProblemOutlinedIcon from '@material-ui/icons/ReportProblemOutlined';
+import WarningSharpIcon from '@material-ui/icons/WarningSharp';
+import ReportProblemIcon from '@material-ui/icons/ReportProblem';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+
+function Home() {
+
+  const [listOfPosts, setListOfPosts ] = useState([]);
+  const [listOfLikeInPost, setListOfLikeInPost ] = useState([]);
+  const [listOfPostInAlert, setListOfPostInAlert] =useState([]); 
+  const { authState } = useContext(AuthContext);
+  let history = useHistory();
+
+  useEffect(() => {
+    if (!localStorage.getItem("accesToken")) {
+      history.push("/login");
+    } else {
+    Axios.get("http://localhost:3006/api/posts",
+    {headers:{
+      accesToken: localStorage.getItem("accesToken")
+    }})
+         .then((response)=>{
+          setListOfPosts(response.data.listOfPosts);
+          setListOfLikeInPost(response.data.listOfLikeInPost.map((like)=>{
+            return like.PostId
+          }));
+          setListOfPostInAlert(response.data.listOfPostInAlert.map((alert)=>{
+            return alert.PostId
+          }));
+
+    }).catch((err)=>{
+      console.log(err);
+    });}
+
+  },[])
+
+  const likePost = (postId) => {
+    Axios.post("http://localhost:3006/api/likes/",
+     {PostId:postId},
+     {headers:{
+       accesToken: localStorage.getItem("accesToken")
+     }})
+     .then((response)=>{
+       setListOfPosts(listOfPosts.map((post)=> {         
+         if (post.id === postId){
+           if(response.data.liked){
+            return{...post, Likes: [...post.Likes, 0]}
+          }else {
+            const likeInPost = post.Likes;
+            likeInPost.pop();
+            return{...post, Likes: likeInPost}
+          }
+         }else{
+           return post
+         }
+       }))
+
+       if(listOfLikeInPost.includes(postId)){
+        setListOfLikeInPost(listOfLikeInPost.filter((id) => { return id !== postId}))
+       }else{
+         setListOfLikeInPost([...listOfLikeInPost, postId])
+       }
+
+
+     })
+     .catch((err)=>{
+       console.log(err);
+     })
+ 
+  }
+
+  const signalPost = (PostId) => {
+    const UserId = authState.id;
+    Axios.post("http://localhost:3006/api/alert/post",
+     {PostId:PostId, UserId:UserId},
+     {headers:{
+       accesToken: localStorage.getItem("accesToken")
+     }})
+     .then((response)=>{
+      setListOfPostInAlert(listOfPostInAlert.map((post) => { 
+        console.log(response);        
+         if (post.id === PostId){
+           if(response.data.alerted){
+            return{...post, PostsSignalled: [...post.PostsSignalled, 0]}
+          }else {
+            const alertInPost = post.PostsSignalled;
+            alertInPost.pop();
+            return{...post, PostsSignalled: alertInPost}
+          }
+         }else{
+           return post
+         } 
+       }))
+
+       if(listOfPostInAlert.includes(PostId)){
+        setListOfPostInAlert(listOfPostInAlert.filter((id) => { return id !== PostId}))
+       }else{
+        setListOfPostInAlert([...listOfPostInAlert, PostId])
+       }
+
+
+     })
+     .catch((err)=>{
+       console.log(err);
+     })
+ 
+  }
+
+    return (
+      <div>
+        
+      <div>
+        {authState.role ==="1" &&
+        <div className="admin-home">
+          <SupervisorAccountIcon className="SupervisorAccountIcon" titleAccess="Vous êtes connecté en Administrateur"/>
+          <Link to={"/dashbord"} style={{ textDecoration: 'none', color:'initial'}}><DashboardSharpIcon className="DashboardIcon" titleAccess="Acceder au tableau de gestion"/></Link>
+        </div>
+        }
+      </div>
+
+        <div className="post-contain">
+            {
+
+    listOfPosts.map((value, key) => {
+      console.log(value.createdAt)
+        return (
+          <div key={key} className="post-card" >
+            <div className="header-post-card" onClick={() => {
+            history.push(`/post/${value.id}`)
+          }}>
+              <div className="title-post-card">
+                {value.title}
+              </div>
+              <div className="textContent-post-card">
+                {value.postText}
+              </div>
+            </div>
+            <div className="footer-post-card">
+              <div >            
+                  <Link to={`/profile/${value.UserId}`} style={{ textDecoration: 'none', color:'initial'}}>{value.userPseudo}</Link>             
+              </div>
+              <div className="like-choose">
+                { (listOfLikeInPost.includes(value.id)) ?               
+                  <ThumbUpAltIcon onClick={()=> likePost(value.id)}/> : <ThumbUpAltOutlinedIcon  onClick={()=> likePost(value.id)}/>              
+                }            
+              <span>{value.Likes.length}</span>
+              </div>
+              <div>
+              { (listOfPostInAlert.includes(value.id)) ?    
+                 <ReportProblemIcon className="WarningOutlinedIcon" onClick={()=> signalPost(value.id)} titleAccess="Vous avez déjà signaler ce problème" color="action"/>:
+                 <ReportProblemOutlinedIcon className="ReportProblemOutlinedIcon" onClick={()=> signalPost(value.id)} titleAccess="signaler un probléme avec ce post" />
+                
+              }
+              </div>
+              <span>{Date(value.createdAt).slice(3,15)}</span>
+            </div>
+          </div>
+        )
+      })}
+        </div>
+        </div>
+    )
+}
+
+export default Home
