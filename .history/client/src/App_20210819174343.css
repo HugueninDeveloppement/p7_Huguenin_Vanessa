@@ -1,0 +1,308 @@
+.App {
+  text-align: center;
+  font-family: 'PT Sans', sans-serif;
+
+}
+
+.logo-header {
+  height: 100px;
+  width: 100%;
+}
+
+.nav-log,.nav-home,.nav-rigth{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding-bottom: 1em;
+  background-color: aliceblue;
+  padding-top: 0.6em;
+}
+
+.nav-name{
+  display: flex;
+  flex-direction: row;  
+  justify-content: space-around;
+  align-items: center;
+}
+
+.nav-rigth button{
+  text-align: center;
+  height: 25px;
+  border: 1px rgb(106, 131, 138) solid;
+  border-radius: 15px;
+  background-color:rgb(45, 194, 231);  
+  border: 2px solid rgb(45, 194, 231);
+}
+
+.form-login{
+  padding: 1em;
+  border: 2px solid rgb(106, 131, 138);
+  border-radius: 15px;
+}
+
+.group-form-login{
+  display: flex;
+  padding: 0.5em;
+}
+
+.group-form-login label{
+  width: 40%;
+  text-align: start;
+}
+
+.group-form-login input textarea {
+  background-color:rgb(45, 194, 231);
+  color:rgb(106, 131, 138)
+}
+
+.form-login button,.form-register button{
+  border: 1px rgb(45, 194, 231)solid;
+  border-radius: 15px;
+  background-color:rgb(45, 194, 231);
+  margin-top: 1em;
+}
+
+.group-form-register{
+  display: flex;
+  flex-direction: column;
+  padding: 0.5em;
+}
+
+.form-register{
+  padding: 1em;
+  border: 2px solid rgb(45, 194, 231);
+  border-radius: 15px;
+}
+
+.group-form-register label{
+  width: 40%;
+  text-align: start;
+}
+
+.form-register-alert{
+  width: 100%;
+}
+
+.formPostContainer{
+  width: 90%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-top: 15px;
+}
+
+.createPost-contain{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 64vh;
+  background-color: rgb(163, 207, 219);
+  padding-top: 15px;
+}
+
+.formPostContainer div{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1em;
+ 
+}
+
+.createPost-contain-title{
+   height: 80px;
+   display: flex;
+   flex-direction: column;
+}
+
+.createPost-contain-body{
+  display: flex;
+  flex-direction: column;
+}
+
+.formPostContainer label{
+  width: 20%;
+  display: flex;
+  align-items: center;
+}
+
+.formPostContainer input{
+  width: 75%;
+  border: 2px solid rgb(45, 194, 231);
+  font-size: 1.2em;
+}
+
+.formPostContainer span{
+  width: 100%;
+}
+
+.formPostContainer textarea{
+  height: 200px;
+  width: 75%;
+  border: 2px solid rgb(45, 194, 231);
+  font-size: 1.2em;
+}
+
+.formPostContainer button{
+  border: 1px rgb(45, 194, 231)solid;
+  border-radius: 15px;
+  background-color:rgb(45, 194, 231);
+  margin-top: 1em;
+  width: 60%;
+  align-self: center;
+}
+
+.admin-home{
+  display: flex;
+  justify-content: space-around;
+}
+
+.PermIdentityTwoToneIcon,.SupervisorAccountIcon,.DashboardIcon, .ThumbUpAltIcon,.ThumbUpAltOutlinedIcon{
+  color: rgb(45, 194, 231);
+}
+
+.post-contain{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(163, 207, 219);
+}
+
+.post-card{
+  width: 90%;
+  border: 2px solid rgb(45, 194, 231);
+  background-color: aliceblue;
+  border-radius: 15px;
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+}
+
+.header-post-card{
+  border-bottom:2px solid rgb(45, 194, 231);
+}
+
+.title-post-card{
+  padding: 0.3em;
+  border-bottom:2px solid rgb(45, 194, 231);
+  border-radius:15px 15px 0px 0px ; 
+  font-weight: 600;
+  font-size: 1.2em;  
+  background-color: white;
+}
+
+.textContent-post-card{
+  padding: 0.3em;
+  font-size: 1.1em;
+  word-wrap:inherit ;
+  overflow: clip;
+  text-overflow: ellipsis;
+  height: 180px;
+}
+
+.footer-post-card{
+  color:rgb(45, 194, 231);
+  border-radius: 0px 0px 15px 15px;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.3em;
+}
+
+.footer-post-card div,span{
+  padding-left: 0.3em;
+  padding-right: 0.3em;
+  margin-top:0.4em ;
+}
+
+.footer-post-card a{
+  
+  color:rgb(45, 194, 231);
+}
+
+.ReportProblemIcon {
+  color:rgb(196, 142, 81);  
+}
+
+/******* PostPage*************/
+
+.postPage{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0.6em;
+  padding-bottom: 0.6em;
+  background-color:rgb(163, 207, 219);
+  min-height: 65vh;
+}
+
+.postContainer{
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  border: 2px solid rgb(45, 194, 231);
+  border-radius: 15px;
+  background-color: aliceblue;
+  padding-bottom: 0.4em;
+}
+
+.head-postContainer{ 
+  border-bottom:2px solid rgb(45, 194, 231);
+}
+
+.head-postContainer-title{
+  padding-top: 00.3em;
+  font-weight: 600;
+}
+
+.head-postContainer-postText{
+  background-color: white;  
+  border-bottom:2px solid rgb(45, 194, 231);
+  border-top:2px solid rgb(45, 194, 231);
+  padding: 5px;
+}
+
+.head-postContainer-userPseudo{
+font-size: 0.6em;
+display: flex;
+flex-direction: row;
+justify-content: space-evenly;
+align-items: center;
+}
+
+.commentContainerinput{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  margin-top: 0.6em;
+}
+
+.commentContainerinput input{
+  width: 68%;
+  border: 2px solid rgb(45, 194, 231);
+  border-radius: 15px 0px 0px 15px;
+  padding-left: 0.2em;
+}
+
+.commentContainerinput button{
+  width: 27%;
+  border: 1px rgb(45, 194, 231)solid;
+  border-radius: 0px 15px 15px 0px;
+  background-color:rgb(45, 194, 231);
+  padding-right: 0.9em;
+}
+
+.comment-contain{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.onecomment{
+  width: 85%;
+  border: 1px rgb(45, 194, 231)solid;
+  border-radius: 0px 15px 15px 0px;
+}
