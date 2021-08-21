@@ -10,7 +10,6 @@ const CryptoJS = require('crypto-js');
 
 Router.post("/auth", (req, res) => {
     const {userPseudo , userName, userPassword} = req.body;
-    console.log(req.body);
     const emailCrypted =  CryptoJS.AES.encrypt(req.body.userEmail, "MyCrypt0Key").toString(); 
     Bcrypt.hash(userPassword , 10)
         .then((passwordHash)=>{            
@@ -69,22 +68,16 @@ Router.get("/userInfo/:id", validateToken,async (req, res)=> {
 Router.get("/userAllInfo/:id", validateToken ,async (req, res)=> {
     const id = req.params.id;
 
-    const userAllInfo = await Users.findByPk(id,{attributes: {exclude: ["userRole"]}});
-    const bytesEmail = CryptoJS.AES.decrypt(userAllInfo.userEmail, "MyCrypt0Key");
-    const emailDecrypted = bytesEmail.toString(CryptoJS.enc.Utf8);
-    userAllInfo.userEmail = emailDecrypted
-    res.json(userAllInfo)    
+    const userAllInfo = await Users.findByPk(id,{attributes: {exclude: ["userRole"]}})
+
+    const emailDecrypted = 
+
+    res.json(userAllInfo)
 });
 
 Router.get("/userControl", validateToken ,async (req, res)=> {
 
-    const listOfUsersWithEncryptEmail = await Users.findAll({order:[['id','DESC']]});
-    const listOfUsers = listOfUsersWithEncryptEmail.map((user)=>{
-        const bytesEmail = CryptoJS.AES.decrypt(user.userEmail, "MyCrypt0Key");
-        const emailDecrypted = bytesEmail.toString(CryptoJS.enc.Utf8);
-        user.userEmail = emailDecrypted
-        return user
-    })
+    const listOfUsers = await Users.findAll({order:[['id','DESC']]});
 
     res.json({listOfUsers:listOfUsers})
 });

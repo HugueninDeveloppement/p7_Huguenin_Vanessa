@@ -8,7 +8,7 @@ const db = require('./models');
 const app = express();
 app.use(express.json());
 app.use(cors());
-app.use(helmet());
+//app.use(helmet());
 
 ///////// Routers ///////////
 const postRouter = require('./routes/Posts')

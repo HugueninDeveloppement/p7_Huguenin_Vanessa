@@ -73,18 +73,12 @@ Router.get("/userAllInfo/:id", validateToken ,async (req, res)=> {
     const bytesEmail = CryptoJS.AES.decrypt(userAllInfo.userEmail, "MyCrypt0Key");
     const emailDecrypted = bytesEmail.toString(CryptoJS.enc.Utf8);
     userAllInfo.userEmail = emailDecrypted
-    res.json(userAllInfo)    
+   res.json(userAllInfo)    
 });
 
 Router.get("/userControl", validateToken ,async (req, res)=> {
 
-    const listOfUsersWithEncryptEmail = await Users.findAll({order:[['id','DESC']]});
-    const listOfUsers = listOfUsersWithEncryptEmail.map((user)=>{
-        const bytesEmail = CryptoJS.AES.decrypt(user.userEmail, "MyCrypt0Key");
-        const emailDecrypted = bytesEmail.toString(CryptoJS.enc.Utf8);
-        user.userEmail = emailDecrypted
-        return user
-    })
+    const listOfUsers = await Users.findAll({order:[['id','DESC']]});
 
     res.json({listOfUsers:listOfUsers})
 });

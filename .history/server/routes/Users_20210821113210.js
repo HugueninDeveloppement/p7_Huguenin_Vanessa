@@ -4,37 +4,35 @@ const {Users} = require('../models');
 const Bcrypt = require('bcrypt');
 const { sign } =require('jsonwebtoken');
 const {validateToken} = require('../middlewares/authMiddleware');
-const CryptoJS = require('crypto-js');
 
 
 
 Router.post("/auth", (req, res) => {
-    const {userPseudo , userName, userPassword} = req.body;
-    console.log(req.body);
-    const emailCrypted =  CryptoJS.AES.encrypt(req.body.userEmail, "MyCrypt0Key").toString(); 
+    const {userPseudo , userName , userEmail, userPassword} = req.body;   
+
     Bcrypt.hash(userPassword , 10)
         .then((passwordHash)=>{            
                 Users.create({
                     userPseudo: userPseudo,
                     userName: userName,
-                    userEmail: emailCrypted,
+                    userEmail: userEmail,
                     userPassword: passwordHash,
                     userRole:false           
                 }).then((user)=>{
-                    res.json(user)
+                    res.status(200).json(user)
                 }).catch((err)=> {
-                        console.log(err.errors[0]);
-                    if(err.errors[0].path === "userPseudo"){
-                    res.json(error = "utilisateur déja enregistré")
-                    }else if (err.errors[0].path === "userEmail"){
-                        res.json(error = "email déja pris")
-                    }                      
+                        res.status(404).json(err.errors[0].path)
+                    /*if(err.errors[0].path === "users.userPseudo"){
+                    res.json({error : "utilisateur déja enregistré"})
+                    }else if (err.errors[0].path === "users.userEmail"){
+                        res.json({error:"email déja pris"})
+                    }  **/                    
                 })                   
         }).catch((error)=>{
             if(error){
                 res.json({error: "non enregistré"})
             }
-        })                           
+        })                
 });
 
 Router.post("/login" , async (req, res)=>{
@@ -69,22 +67,14 @@ Router.get("/userInfo/:id", validateToken,async (req, res)=> {
 Router.get("/userAllInfo/:id", validateToken ,async (req, res)=> {
     const id = req.params.id;
 
-    const userAllInfo = await Users.findByPk(id,{attributes: {exclude: ["userRole"]}});
-    const bytesEmail = CryptoJS.AES.decrypt(userAllInfo.userEmail, "MyCrypt0Key");
-    const emailDecrypted = bytesEmail.toString(CryptoJS.enc.Utf8);
-    userAllInfo.userEmail = emailDecrypted
-    res.json(userAllInfo)    
+    const userAllInfo = await Users.findByPk(id,{attributes: {exclude: ["userRole"]}})
+
+    res.json(userAllInfo)
 });
 
 Router.get("/userControl", validateToken ,async (req, res)=> {
 
-    const listOfUsersWithEncryptEmail = await Users.findAll({order:[['id','DESC']]});
-    const listOfUsers = listOfUsersWithEncryptEmail.map((user)=>{
-        const bytesEmail = CryptoJS.AES.decrypt(user.userEmail, "MyCrypt0Key");
-        const emailDecrypted = bytesEmail.toString(CryptoJS.enc.Utf8);
-        user.userEmail = emailDecrypted
-        return user
-    })
+    const listOfUsers = await Users.findAll({order:[['id','DESC']]});
 
     res.json({listOfUsers:listOfUsers})
 });
