@@ -40,7 +40,7 @@ function App() {
     
     localStorage.removeItem("accesToken");
     setAuthState({id:0, userPseudo:"", role:"", status:false});
-    window.location.href="http://localhost:3000/login"
+    window.location.href="https://practical-bohr-51455d.netlify.app/login"
   }
 
   return (
